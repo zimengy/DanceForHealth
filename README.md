@@ -1,2 +1,1 @@
-CIT573
-======
+Set up the environment
