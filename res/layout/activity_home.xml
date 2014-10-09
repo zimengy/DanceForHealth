@@ -16,16 +16,16 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/custom_font"
+            android:id="@+id/welcomeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:gravity="center"
-            android:text="Welcome to the Dance for Health App!"
+            android:text="@string/welcome_text_view"
             android:textSize="40sp" />
 
         <Button
-            android:id="@+id/preWorkout"
+            android:id="@+id/preWorkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -33,10 +33,10 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/custom_button"
             android:onClick="onPrevButtonClick"
-            android:text="Previous Workouts" />
+            android:text="@string/previous_workout_button" />
 
         <Button
-            android:id="@+id/newWorkout"
+            android:id="@+id/newWorkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -44,17 +44,17 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/custom_button"
             android:onClick="onNewButtonClick"
-            android:text="New Workout" />
+            android:text="@string/new_workout_button" />
 
         <Button
-            android:id="@+id/progress"
+            android:id="@+id/showProgressButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
             android:background="@drawable/custom_button"
             android:onClick="onProgressButtonClick"
-            android:text="See Your Progress" />
+            android:text="@string/show_progress_button" />
 
         <!-- uncomment this block of code for testing (autogenerates workouts) -->
 <!--         <Button -->

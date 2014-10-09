@@ -21,7 +21,8 @@ import android.widget.TextView;
 public class LoadingScreenActivity extends Activity{
 	
 	private String file = "data_workout";
-	private String data = "";
+	private TextView welcomeTextView;
+	private TextView levelTextView;
 
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +33,13 @@ public class LoadingScreenActivity extends Activity{
 		try{
 			FileInputStream fin = openFileInput(file);
 			int c;
-			String temp="";
+			String content="";
 			while( (c = fin.read()) != -1){
-				temp = temp + Character.toString((char)c);
+				content = content + Character.toString((char)c);
 			}
-			data = temp;
 		//	Toast.makeText(getBaseContext(),"file read",
 			//		Toast.LENGTH_SHORT).show();
-			HomeActivity.createDatabase(data);
+			HomeActivity.createDatabase(content);
 			Log.v("home", "read from log file");
 			 
 			
@@ -88,22 +88,22 @@ public class LoadingScreenActivity extends Activity{
 			Log.v("loading", "created data file");
 		}
 		// set fonts
-		TextView txt = (TextView) findViewById(R.id.custom_font);
+		welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
 		Typeface font = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
 		Typeface font_two = Typeface.createFromAsset(getAssets(),
 				"Komika_display.ttf");
-		txt.setTypeface(font);
+		welcomeTextView.setTypeface(font);
 		
-		TextView leveltxt = (TextView) findViewById(R.id.level);
+		levelTextView = (TextView) findViewById(R.id.workoutLevelTextView);
 		// level up every 5 hours you work out
 		// starting level is level 1
 		int level = calculateTime()/300 + 1;
 		int nextLevel = calculateTime()/300 + 2;
 		int minutesUntilNext = nextLevel*300 - calculateTime();
-		leveltxt.setText("You are currently at level " + level + " and have lost "+
+		levelTextView.setText("You are currently at level " + level + " and have lost "+
 				 + calculateWeightLoss() + " pounds!\nWork out for " +
 				minutesUntilNext + " more minutes to level up!");
-		leveltxt.setTypeface(font_two);
+		levelTextView.setTypeface(font_two);
 		//leveltxt.setTyp
 		timer.start();
 	}
@@ -116,6 +116,7 @@ public class LoadingScreenActivity extends Activity{
 		return true;
 	}
 	
+	/* need refactoring */
 	public void readFromFile() throws Exception {
 
 		String path = getFilesDir().getPath();
@@ -155,12 +156,12 @@ public class LoadingScreenActivity extends Activity{
 	
 	// calculates the level that the person is currently at by their time
 	public int calculateTime() {
-		PrevWorkout pws = PrevWorkout.getInstance();
-		if(pws.size() == 0) {
+		PrevWorkout workouts = PrevWorkout.getInstance();
+		if(workouts.size() == 0) {
 			return 0;
 		}
 		int sum = 0;
-		for (Workout w : pws.getPrevious()) {
+		for (Workout w : workouts.getPrevious()) {
 			sum += w.getTime();
 		}
 		return sum;
@@ -168,12 +169,12 @@ public class LoadingScreenActivity extends Activity{
 
 	// calculates the level the person is currently at by their weight loss
 	public int calculateWeightLoss() {
-		PrevWorkout pws = PrevWorkout.getInstance();
-		if(pws.size()==0) {
+		PrevWorkout workouts = PrevWorkout.getInstance();
+		if(workouts.size()==0) {
 			return 0;
 		}
-		int startWeight = pws.getPrevious().get(0).getWeight();
-		int finishWeight = pws.getPrevious().get(pws.size() - 1).getWeight();
+		int startWeight = workouts.getPrevious().get(0).getWeight();
+		int finishWeight = workouts.getPrevious().get(workouts.size() - 1).getWeight();
 		int weightLoss = finishWeight - startWeight;
 		return weightLoss;
 	}
@@ -193,8 +194,8 @@ public class LoadingScreenActivity extends Activity{
 
 
 	public static String getStringFromFile(String filePath) throws Exception {
-		File fl = new File(filePath);
-		FileInputStream fin = new FileInputStream(fl);
+		File file = new File(filePath);
+		FileInputStream fin = new FileInputStream(file);
 		String ret = convertStreamToString(fin);
 		// Make sure you close all streams.
 		fin.close();

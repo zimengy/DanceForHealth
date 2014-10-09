@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 public class HeartRateActivity extends Activity {
 	
-	private Workout w;
+	private Workout workout;
+	private TextView howToTextView;
+	private TextView textView;
+	private Button nextButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +23,17 @@ public class HeartRateActivity extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
  		if (extras != null) {
- 		    w = (Workout) extras.get("workout");
+ 		    workout = (Workout) extras.get("workout");
  		}
  		
 
-		TextView txt = (TextView) findViewById(R.id.custom_font_two);
-		TextView txt1 = (TextView) findViewById(R.id.textView1);
-		Button b = (Button) findViewById(R.id.button1);
+		howToTextView = (TextView) findViewById(R.id.howToTextView);
+		textView = (TextView) findViewById(R.id.textView);
+		nextButton = (Button) findViewById(R.id.nextButton);
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		txt.setTypeface(font);
-		txt1.setTypeface(font);
-		b.setTypeface(font);
+		howToTextView.setTypeface(font);
+		textView.setTypeface(font);
+		nextButton.setTypeface(font);
 	}
 
 	@Override
@@ -44,22 +47,22 @@ public class HeartRateActivity extends Activity {
 		
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, HeartRateTwo.class).putExtra("workout", w);
+		Intent intent = new Intent(this, HeartRateTwo.class).putExtra("workout", workout);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 	
 public void onBackButtonClick(View view) {
 		
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, WeightAndStepsActivity.class).putExtra("workout", w);
+		Intent intent = new Intent(this, WeightAndStepsActivity.class).putExtra("workout", workout);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 
 }

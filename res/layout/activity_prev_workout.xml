@@ -22,7 +22,7 @@
     <ListView>
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/linearLayout1"
@@ -54,7 +54,7 @@
         -->
 
         <Button
-            android:id="@+id/preWorkout"
+            android:id="@+id/preWorkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -62,7 +62,7 @@
             android:layout_marginBottom="28dp"
             android:background="@drawable/custom_button"
             android:onClick="onBackButtonClick"
-            android:text="Back" />
+            android:text="@string/back" />
     </ListView>
 
 </RelativeLayout>

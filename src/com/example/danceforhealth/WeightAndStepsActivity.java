@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class WeightAndStepsActivity extends Activity{
 	private int weight;
 	private int steps;
-	private Workout w;
+	private Workout workout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +22,20 @@ public class WeightAndStepsActivity extends Activity{
 		setContentView(R.layout.activity_weight_and_steps);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-		    w = (Workout) extras.get("workout");
+			workout = (Workout) extras.get("workout");
 		}
 		
-		TextView txt1 = (TextView) findViewById(R.id.textView1);
-		EditText etxt1 = (EditText) findViewById(R.id.editText1);
-		TextView txt2 = (TextView) findViewById(R.id.textView2);
-		EditText etxt2 = (EditText) findViewById(R.id.editText2);
-		Button b = (Button) findViewById(R.id.button1);
+		TextView stepTextView = (TextView) findViewById(R.id.stepTextView);
+		EditText stepEditText = (EditText) findViewById(R.id.stepEditText);
+		TextView weightTextView = (TextView) findViewById(R.id.weightTextView);
+		EditText weightEditText = (EditText) findViewById(R.id.weightEditText);
+		Button nextButton = (Button) findViewById(R.id.nextButton);
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		txt1.setTypeface(font);
-		etxt1.setTypeface(font);
-		txt2.setTypeface(font);
-		etxt2.setTypeface(font);
-		b.setTypeface(font);
+		stepTextView.setTypeface(font);
+		stepEditText.setTypeface(font);
+		weightTextView.setTypeface(font);
+		weightEditText.setTypeface(font);
+		nextButton.setTypeface(font);
 	}
 	
 	@Override
@@ -46,59 +46,59 @@ public class WeightAndStepsActivity extends Activity{
 	}
 	
 	public void onNextButtonClick(View view) {
-		EditText et1 = (EditText) findViewById(R.id.editText1);
-		EditText et2 = (EditText) findViewById(R.id.editText2);
-		if(!et1.getText().toString().trim().equals("")) {
-			steps = Integer.parseInt(et1.getText().toString());
-			w.setSteps(steps);
+		EditText stepEditText = (EditText) findViewById(R.id.stepEditText);
+		EditText weightEditText = (EditText) findViewById(R.id.weightEditText);
+		if(!stepEditText.getText().toString().trim().equals("")) {
+			steps = Integer.parseInt(stepEditText.getText().toString());
+			workout.setSteps(steps);
 		}
 		else {
-			w.setSteps(0);
+			workout.setSteps(0);
 		}
-		if(!(et2.getText().toString().trim().equals(""))) {
-			weight = Integer.parseInt(et2.getText().toString());
-			w.setWeight(weight);
+		if(!(weightEditText.getText().toString().trim().equals(""))) {
+			weight = Integer.parseInt(weightEditText.getText().toString());
+			workout.setWeight(weight);
 
 		}
 		else {
-			w.setWeight(0);
+			workout.setWeight(0);
 		}
 	
-		Log.v("duration", "= " + w.getTime());
+		Log.v("duration", "= " + workout.getTime());
 	
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, HeartRateActivity.class).putExtra("workout", w);
+		Intent intent = new Intent(this, HeartRateActivity.class).putExtra("workout", workout);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 	public void onBackButtonClick(View view) {
 		
-		EditText et1 = (EditText) findViewById(R.id.editText1);
-		EditText et2 = (EditText) findViewById(R.id.editText2);
-		if(!et1.getText().toString().trim().equals("")) {
-			steps = Integer.parseInt(et1.getText().toString());
-			w.setSteps(steps);
+		EditText stepEditText = (EditText) findViewById(R.id.stepEditText);
+		EditText weightEditText = (EditText) findViewById(R.id.weightEditText);
+		if(!stepEditText.getText().toString().trim().equals("")) {
+			steps = Integer.parseInt(stepEditText.getText().toString());
+			workout.setSteps(steps);
 		}
 		else {
-			w.setSteps(0);
+			workout.setSteps(0);
 		}
-		if(!et2.getText().toString().trim().equals("")) {
-			weight = Integer.parseInt(et2.getText().toString());
-			w.setWeight(weight);
+		if(!weightEditText.getText().toString().trim().equals("")) {
+			weight = Integer.parseInt(weightEditText.getText().toString());
+			workout.setWeight(weight);
 
 		}
 		else {
-			w.setWeight(0);
+			workout.setWeight(0);
 		}
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, RatingActivity.class).putExtra("workout", w);
+		Intent intent = new Intent(this, RatingActivity.class).putExtra("workout", workout);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 }

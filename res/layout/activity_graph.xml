@@ -59,7 +59,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/custom_button"
             android:onClick="onBackButtonClick"
-            android:text="Back" />
+            android:text="@string/back" />
     </LinearLayout>
 
 </RelativeLayout>

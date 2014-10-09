@@ -23,6 +23,7 @@ import android.widget.Button;
 public class YearProgressActivity extends Activity {
 
 	private XYPlot plot;
+	private Button backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +39,22 @@ public class YearProgressActivity extends Activity {
  
         // get current date and month
         Date d = new Date();
-        SimpleDateFormat ft = 
+        SimpleDateFormat format = 
 				new SimpleDateFormat ("E M dd yyyy");
-		String current = ft.format(d);
-		String[] temp = current.toString().split(" ");
-		int currentMonth = Integer.parseInt(temp[1]);
-		String currentYear = temp[3];
+		String current = format.format(d);
+		String[] dateString = current.toString().split(" ");
+		int currentMonth = Integer.parseInt(dateString[1]);
+		String currentYear = dateString[3];
 		
 		int count = 0;
 		Number[] values = new Number[13];
-		for (Workout w : workouts) {
-			String[] date = w.getDate().split(" ");
+		for (Workout workout : workouts) {
+			String[] date = workout.getDate().split(" ");
     		int month = Integer.parseInt(date[1]);
     		String year = date[3];
     		if (year.equals(currentYear)) {
     			if (values[month] == null) count++;
-    			values[month] = w.getWeight();
+    			values[month] = workout.getWeight();
     		}
 		}
 		
@@ -68,8 +69,13 @@ public class YearProgressActivity extends Activity {
     			else toggle = false;
     		}
     	}
- 
-        // Turn the above arrays into XYSeries':
+		
+		plotYearProgress(values);
+		
+	}
+	
+	private void plotYearProgress(Number[] values) {
+		// Turn the above arrays into XYSeries':
         XYSeries series = new SimpleXYSeries(
                 Arrays.asList(values),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
@@ -90,9 +96,8 @@ public class YearProgressActivity extends Activity {
         plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 10.0);
 
 		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		Button pr = (Button) findViewById(R.id.back);
-		pr.setTypeface(font_two);
-		
+		backButton = (Button) findViewById(R.id.back);
+		backButton.setTypeface(font_two);	
 	}
 
 	@Override

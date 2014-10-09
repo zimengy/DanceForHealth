@@ -18,8 +18,8 @@ public class PrevWorkoutActivity extends ListActivity {
 public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
     
-	PrevWorkout pw = PrevWorkout.getInstance();
-	List<Workout> workouts = pw.getPrevious();
+	PrevWorkout preWorkout = PrevWorkout.getInstance();
+	List<Workout> workouts = preWorkout.getPrevious();
 	Workout[] values = new Workout[workouts.size()];
 	for (int i = 0; i < workouts.size(); i++) {
 		values[i] = workouts.get(i);
@@ -38,7 +38,7 @@ public void onCreate(Bundle icicle) {
     // set font
 	Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
 	TextView t = (TextView) findViewById(R.id.textView1);
-	Button b = (Button) findViewById(R.id.preWorkout);
+	Button b = (Button) findViewById(R.id.preWorkoutButton);
 	t.setTypeface(font_two);
 	b.setTypeface(font_two);
   }
@@ -46,11 +46,11 @@ public void onCreate(Bundle icicle) {
 	public void onBackButtonClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, HomeActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
   
   
@@ -59,15 +59,15 @@ public void onCreate(Bundle icicle) {
     Workout item = (Workout) getListAdapter().getItem(position - 1);
     Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
     
-	Intent i = new Intent();
+	Intent intent = new Intent();
 	Bundle b = new Bundle();
 	b.putParcelable("workout", item);
-	i.putExtras(b);
+	intent.putExtras(b);
 
-	i.setClass(v.getContext(), WorkoutSummary.class);
+	intent.setClass(v.getContext(), WorkoutSummary.class);
 
 	// pass the Intent to the Activity, 
 	// using the specified request code
-	startActivity(i);    
+	startActivity(intent);    
   }
 } 

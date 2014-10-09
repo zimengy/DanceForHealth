@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:background="@drawable/custom_button"
             android:onClick="onBackButtonClick"
-            android:text="Back" />
+            android:text="@string/back" />
     </LinearLayout>
 
 </RelativeLayout>

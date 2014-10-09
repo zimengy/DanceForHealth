@@ -24,7 +24,7 @@
             android:text="Going to this screen just adds a workout to the database" />
 
         <Button
-            android:id="@+id/preWorkout"
+            android:id="@+id/preWorkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
