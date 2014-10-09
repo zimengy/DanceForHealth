@@ -79,8 +79,13 @@ public class WeekProgressActivity extends Activity {
     			else toggle = false;
     		}
     	}
- 
-        // Turn the above arrays into XYSeries':
+   
+		plotWeekProgress(values);
+		
+	}
+	
+	private void plotWeekProgress (Number[] values) {
+		// Turn the above arrays into XYSeries':
         XYSeries series1 = new SimpleXYSeries(
                 Arrays.asList(values),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
@@ -102,9 +107,9 @@ public class WeekProgressActivity extends Activity {
 
 		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
 		Button pr = (Button) findViewById(R.id.back);
-		pr.setTypeface(font_two);
-		
+		pr.setTypeface(font_two);		
 	}
+	
 	
 	private int sortDay(String day) {
 		if (day.equals("Mon")) {

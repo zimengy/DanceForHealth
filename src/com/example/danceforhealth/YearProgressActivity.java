@@ -68,8 +68,13 @@ public class YearProgressActivity extends Activity {
     			else toggle = false;
     		}
     	}
- 
-        // Turn the above arrays into XYSeries':
+		
+		plotYearProgress(values);
+		
+	}
+	
+	private void plotYearProgress(Number[] values) {
+		// Turn the above arrays into XYSeries':
         XYSeries series = new SimpleXYSeries(
                 Arrays.asList(values),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
@@ -91,8 +96,7 @@ public class YearProgressActivity extends Activity {
 
 		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
 		Button pr = (Button) findViewById(R.id.back);
-		pr.setTypeface(font_two);
-		
+		pr.setTypeface(font_two);	
 	}
 
 	@Override
