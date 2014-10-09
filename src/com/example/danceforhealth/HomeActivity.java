@@ -1,8 +1,6 @@
 package com.example.danceforhealth;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -14,12 +12,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends Activity {
 
@@ -33,7 +29,6 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_home);
 
 		Context context = this;
-
 
 		// set fonts
 		TextView txt = (TextView) findViewById(R.id.custom_font);

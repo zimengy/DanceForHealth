@@ -100,5 +100,5 @@ public class WeightAndStepsActivity extends Activity{
 		// pass the Intent to the Activity, 
 		// using the specified request code
 		startActivity(i);
-}
+	}
 }

@@ -1,12 +1,7 @@
 package com.example.danceforhealth;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -30,11 +25,8 @@ public class Workout implements Parcelable {
 		
 		Date date = new Date();
 
-		 SimpleDateFormat ft = 
-			      new SimpleDateFormat ("E M dd yyyy");
-		 this.date = ft.format(date);
-
-
+		SimpleDateFormat ft = new SimpleDateFormat ("E M dd yyyy");
+		this.date = ft.format(date);
 	}
 
 	public Workout(String type, int strain, int hr, int st, int wt) {
@@ -44,8 +36,7 @@ public class Workout implements Parcelable {
 		this.steps = st;
 		this.weight = wt;
 		Date date = new Date();
-		SimpleDateFormat ft = 
-				new SimpleDateFormat ("E M dd yyyy");
+		SimpleDateFormat ft = new SimpleDateFormat ("E M dd yyyy");
 		this.date = ft.format(date);
 	}
 
@@ -57,7 +48,6 @@ public class Workout implements Parcelable {
 		setWeight(p.readInt());
 		setDate(p.readString());
 		setTime(p.readInt());
-
 	}
 
 	public String getDate() {
@@ -183,16 +173,13 @@ public class Workout implements Parcelable {
 	public static final Parcelable.Creator<Workout> CREATOR = new Creator<Workout>() {
 		@Override
 		public Workout createFromParcel(Parcel source) {
-
 			return new Workout(source);
 		}
 
 		@Override
 		public Workout[] newArray(int size) {
-
 			return new Workout[size];
 		}
-
 	};
 
 
@@ -204,7 +191,6 @@ public class Workout implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel parcel, int flags) {
-
 		parcel.writeString(getType());
 		parcel.writeInt(getStrain());
 		parcel.writeInt(getHR());
@@ -212,10 +198,5 @@ public class Workout implements Parcelable {
 		parcel.writeInt(getWeight());
 		parcel.writeString(getDate());
 		parcel.writeInt(getTime());
-
-
-
 	}
-	
-
 }

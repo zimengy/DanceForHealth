@@ -1,7 +1,5 @@
 package com.example.danceforhealth;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -61,8 +59,6 @@ public void onCreate(Bundle icicle) {
     Workout item = (Workout) getListAdapter().getItem(position - 1);
     Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
     
-    
-	  
 	Intent i = new Intent();
 	Bundle b = new Bundle();
 	b.putParcelable("workout", item);
@@ -72,9 +68,6 @@ public void onCreate(Bundle icicle) {
 
 	// pass the Intent to the Activity, 
 	// using the specified request code
-	startActivity(i);
-  
-    
-    
+	startActivity(i);    
   }
 } 

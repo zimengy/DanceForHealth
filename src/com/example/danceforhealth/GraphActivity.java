@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class GraphActivity extends Activity {
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,7 +24,6 @@ public class GraphActivity extends Activity {
 		w.setTypeface(font_two);
 		m.setTypeface(font_two);
 		y.setTypeface(font_two);
-		
 	}
 
 	@Override

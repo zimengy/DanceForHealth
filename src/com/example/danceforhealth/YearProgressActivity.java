@@ -1,7 +1,6 @@
 package com.example.danceforhealth;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -71,17 +70,17 @@ public class YearProgressActivity extends Activity {
     	}
  
         // Turn the above arrays into XYSeries':
-        XYSeries series1 = new SimpleXYSeries(
+        XYSeries series = new SimpleXYSeries(
                 Arrays.asList(values),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
                 "This Year");                           // Set the display title of the series
  
         // Create a formatter to use for drawing a series using LineAndPointRenderer
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.RED, null, null);
+        LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.RED, null, null);
 
  
         // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
+        plot.addSeries(series, seriesFormat);
  
         // reduce the number of range labels
         plot.getGraphWidget().setDomainLabelOrientation(-45);
