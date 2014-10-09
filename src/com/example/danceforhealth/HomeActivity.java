@@ -19,9 +19,13 @@ import android.widget.TextView;
 
 public class HomeActivity extends Activity {
 
+	private final String file = "data_workout";
 	private boolean loadApp = true;
-	private String file = "data_workout";
-	private String data = "";
+	
+	private TextView welcomeTextView;
+	private Button newWorkoutButton;
+	private Button preWorkoutButton;
+	private Button showProgressButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +35,18 @@ public class HomeActivity extends Activity {
 		Context context = this;
 
 		// set fonts
-		TextView txt = (TextView) findViewById(R.id.custom_font);
-		Button btn = (Button) findViewById(R.id.newWorkout);
-		Button pw = (Button) findViewById(R.id.preWorkout);
+		welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
+		newWorkoutButton = (Button) findViewById(R.id.newWorkoutButton);
+		preWorkoutButton = (Button) findViewById(R.id.preWorkoutButton);
 		//Button d = (Button) findViewById(R.id.dummy); <- uncomment this for testing
-		Button pr = (Button) findViewById(R.id.progress);
-		Typeface font = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
-		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		txt.setTypeface(font);
-		btn.setTypeface(font_two);
-		pw.setTypeface(font_two);
+		showProgressButton = (Button) findViewById(R.id.showProgressButton);
+		Typeface komikaFont1 = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
+		Typeface komikaFont2 = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
+		welcomeTextView.setTypeface(komikaFont1);
+		newWorkoutButton.setTypeface(komikaFont2);
+		preWorkoutButton.setTypeface(komikaFont2);
 		//d.setTypeface(font_two); <- uncomment this for testing
-		pr.setTypeface(font_two);
+		showProgressButton.setTypeface(komikaFont2);
 	}
 
 	@Override
@@ -92,6 +96,7 @@ public class HomeActivity extends Activity {
 		startActivity(i);
 	}
 
+	// need refactoring 
 	public static void createDatabase(String data) throws Exception {
 
 		if (data == null || data.equals("")) { return ; }

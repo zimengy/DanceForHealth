@@ -26,7 +26,7 @@ public class DummyActivity extends Activity {
 		
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
 		TextView txt = (TextView) findViewById(R.id.textView1);
-		Button b = (Button) findViewById(R.id.preWorkout);
+		Button b = (Button) findViewById(R.id.preWorkoutButton);
 		txt.setTypeface(font);
 		b.setTypeface(font);
 	}
