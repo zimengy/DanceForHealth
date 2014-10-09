@@ -1,7 +1,5 @@
 package com.example.danceforhealth;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +17,10 @@ import android.widget.Spinner;
 public class NewWorkoutActivity extends Activity implements OnItemSelectedListener{
 
 	public String selection;
-	Workout w = new Workout();
+	private Button nextButton;
+	private Spinner spinner;
+	Workout workout = new Workout();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,11 +28,11 @@ public class NewWorkoutActivity extends Activity implements OnItemSelectedListen
 		
 		Bundle extras = getIntent().getExtras();
  		if (extras != null) {
- 		    w = (Workout) extras.get("workout");
+ 			workout = (Workout) extras.get("workout");
  		}
 		
 
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		spinner = (Spinner) findViewById(R.id.workoutTypeSpinner);
 		spinner.setOnItemSelectedListener(this);
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -40,19 +41,19 @@ public class NewWorkoutActivity extends Activity implements OnItemSelectedListen
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
-		if(!w.getType().equals("")) {
-			setSpinnerSelection(w.getType(), spinner);
+		if(!workout.getType().equals("")) {
+			setSpinnerSelection(workout.getType(), spinner);
 		}
-		EditText et = (EditText) findViewById(R.id.editText1);
-		String time = Integer.toString(w.getTime());
-		et.setText(time);
+		EditText edittext = (EditText) findViewById(R.id.editText);
+		String time = Integer.toString(workout.getTime());
+		edittext.setText(time);
 
 
 		selection = "Dance";
 
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		Button b = (Button) findViewById(R.id.button1);
-		b.setTypeface(font);
+		nextButton = (Button) findViewById(R.id.nextButton);
+		nextButton.setTypeface(font);
 		
 	}
 	
@@ -66,19 +67,19 @@ public class NewWorkoutActivity extends Activity implements OnItemSelectedListen
 	
 	public void onNextButtonClick(View view) {
 		
-		EditText et = (EditText) findViewById(R.id.editText1);
-		int time = Integer.parseInt(et.getText().toString());
+		EditText edittext = (EditText) findViewById(R.id.editText);
+		int time = Integer.parseInt(edittext.getText().toString());
 		Log.v("new workout", "time = " + time);
-		w.setType(selection);
-		w.setTime(time);
+		workout.setType(selection);
+		workout.setTime(time);
 		Log.v("duration", "= " + time);
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, RatingActivity.class).putExtra("workout", w);
+		Intent intent = new Intent(this, RatingActivity.class).putExtra("workout", workout);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 
 	
@@ -105,31 +106,26 @@ public class NewWorkoutActivity extends Activity implements OnItemSelectedListen
 		
 	}
 	
-	public void setSpinnerSelection(String type, Spinner sp) {
+	public void setSpinnerSelection(String type, Spinner spinner) {
 		if(type.equals("Dance")) {
-			sp.setSelection(0);
+			spinner.setSelection(0);
 		}
 		else if(type.equals("Run")) {
-			sp.setSelection(1);
+			spinner.setSelection(1);
 		}
 		else if(type.equals("Walk")) {
-			sp.setSelection(2);
+			spinner.setSelection(2);
 		}
 		else if(type.equals("Bike")) {
-			sp.setSelection(3);
+			spinner.setSelection(3);
 		}
 		else if(type.equals("Swim")) {
-			sp.setSelection(4);
+			spinner.setSelection(4);
 		}
-		
-		
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// TODO Auto-generated method stub
 	}
-	
-
-
 }

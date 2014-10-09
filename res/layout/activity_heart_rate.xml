@@ -15,31 +15,31 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/custom_font_two"
+            android:id="@+id/howToTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="How to take your heart rate:" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1. Using your index and middle fingers, locate your pulse on your wrist, right below your thumb (you should be able to feel a beat)" />
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/hr" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/custom_button"
             android:onClick="onNextButtonClick"
-            android:text="Next Page" />
+            android:text="@string/next_page_button" />
     </LinearLayout>
 
 </RelativeLayout>

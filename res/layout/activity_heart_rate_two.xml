@@ -15,7 +15,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/twoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2. Start the timer and count how many times your pulse beats until the timer ends" />
@@ -26,7 +26,7 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/timer"
+                android:id="@+id/timerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button"
@@ -34,7 +34,7 @@
                 android:text="Start Timer" />
 
             <TextView
-                android:id="@+id/timerText"
+                android:id="@+id/timerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time left: 15"
@@ -42,13 +42,13 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/threeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3. Plug in the number of beats that you counted and then click the button to calculate your heart rate" />
 
         <EditText
-            android:id="@+id/hr_input"
+            android:id="@+id/heartRateEditText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="enter number of beats"
@@ -56,7 +56,7 @@
             android:inputType="number" />
 
         <Button
-            android:id="@+id/hr_input_button"
+            android:id="@+id/heartRateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -65,14 +65,14 @@
             android:text="Calculate Heart Rate!" />
 
         <TextView
-            android:id="@+id/hrText"
+            android:id="@+id/heartRateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\nYour heart rate is: 0\n"
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/viewSummaryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

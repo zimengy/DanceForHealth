@@ -23,6 +23,7 @@ import android.widget.Button;
 public class MonthProgressActivity extends Activity {
 
 	private XYPlot plot;
+	private Button backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,29 +34,29 @@ public class MonthProgressActivity extends Activity {
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
 
         // Get previous workouts
-    	PrevWorkout pw = PrevWorkout.getInstance();
-    	List<Workout> workouts = pw.getPrevious();
+    	PrevWorkout preWorkout = PrevWorkout.getInstance();
+    	List<Workout> workouts = preWorkout.getPrevious();
  
         // get current date and month
         Date d = new Date();
-        SimpleDateFormat ft = 
+        SimpleDateFormat format = 
 				new SimpleDateFormat ("E M dd yyyy");
-		String current = ft.format(d);
-		String[] temp = current.toString().split(" ");
-		int currentDay = Integer.parseInt(temp[2]);
-		String currentMonth = temp[1];
+		String current = format.format(d);
+		String[] dateString = current.toString().split(" ");
+		int currentDay = Integer.parseInt(dateString[2]);
+		String currentMonth = dateString[1];
         
 		int count = 0;
 		Number[] values = new Number[6];
-		for (Workout w : workouts) {
-			String[] date = w.getDate().split(" ");
+		for (Workout workout : workouts) {
+			String[] date = workout.getDate().split(" ");
     		int day = Integer.parseInt(date[2]);
     		String dow = date[0];
     		String month = date[1];
     		if (month.equals(currentMonth)) {
-    			if (day - sortDay(dow)<= 0) values[1] = w.getWeight();
-    			else if ((day - sortDay(dow))/7 == 4) values[(day - sortDay(dow))/7 + 1] = w.getWeight();
-    			else values[(day - sortDay(dow))/7 + 2] = w.getWeight();
+    			if (day - sortDay(dow)<= 0) values[1] = workout.getWeight();
+    			else if ((day - sortDay(dow))/7 == 4) values[(day - sortDay(dow))/7 + 1] = workout.getWeight();
+    			else values[(day - sortDay(dow))/7 + 2] = workout.getWeight();
     			count++;
     		}
 		}
@@ -71,24 +72,23 @@ public class MonthProgressActivity extends Activity {
     			else toggle = false;
     		}
     	}
-		
 		plotMonthProgress(values);
 		
 	}
 	
 	private void plotMonthProgress(Number[] values) {
 		// Turn the above arrays into XYSeries':
-        XYSeries series1 = new SimpleXYSeries(
+        XYSeries series = new SimpleXYSeries(
                 Arrays.asList(values),          // SimpleXYSeries takes a List so turn our array into a List
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, // Y_VALS_ONLY means use the element index as the x value
                 "This Month");                           // Set the display title of the series
  
         // Create a formatter to use for drawing a series using LineAndPointRenderer
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.RED, null, null);
+        LineAndPointFormatter seriesFormat = new LineAndPointFormatter(Color.RED, Color.RED, null, null);
 
  
         // add a new series' to the xyplot:
-        plot.addSeries(series1, series1Format);
+        plot.addSeries(series, seriesFormat);
  
         // reduce the number of range labels
         plot.getGraphWidget().setDomainLabelOrientation(-45);
@@ -98,8 +98,8 @@ public class MonthProgressActivity extends Activity {
         plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 10.0);
 
 		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		Button pr = (Button) findViewById(R.id.back);
-		pr.setTypeface(font_two);		
+		backButton = (Button) findViewById(R.id.back);
+		backButton.setTypeface(font_two);		
 	}
 	
 	private int sortDay(String day) {

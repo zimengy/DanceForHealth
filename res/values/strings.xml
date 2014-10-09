@@ -39,5 +39,8 @@
     <string name="title_activity_week_progress">Weekly Progress</string>
     <string name="title_activity_month_progress">Monthly Progress</string>
     <string name="title_activity_year_progress">Yearly Progress</string>
+    <string name="question_workout_type_text_view">What type of workout did you do?</string>
+    <string name="question_minutes_text_view">How many minutes did you do it for?</string>
+    <string name="next_page_button">Next Page</string>
 
 </resources>

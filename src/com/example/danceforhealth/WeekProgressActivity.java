@@ -23,6 +23,7 @@ import android.widget.Button;
 public class WeekProgressActivity extends Activity {
 
 	private XYPlot plot;
+	private Button backButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +34,14 @@ public class WeekProgressActivity extends Activity {
         plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
  
         // Get previous workouts
-    	PrevWorkout pw = PrevWorkout.getInstance();
-    	List<Workout> workouts = pw.getPrevious();
+    	PrevWorkout preWorkout = PrevWorkout.getInstance();
+    	List<Workout> workouts = preWorkout.getPrevious();
     	
     	// get current date and week
 		Date current = new Date();
-		String[] temp = current.toString().split(" ");
-		Integer currentDay = Integer.parseInt(temp[2]);
-		String currentDOW = temp[0];
+		String[] dateString = current.toString().split(" ");
+		Integer currentDay = Integer.parseInt(dateString[2]);
+		String currentDOW = dateString[0];
 		int min = sortDay(currentDOW);
 		
     	// turn workouts into an array of values
@@ -48,8 +49,8 @@ public class WeekProgressActivity extends Activity {
     	int count = 0;
     	
     	// sort workouts by date
-    	for (Workout w : workouts) {
-    		String[] date = w.getDate().split(" ");
+    	for (Workout workout : workouts) {
+    		String[] date = workout.getDate().split(" ");
     		Integer day = Integer.parseInt(date[2]);
     		Integer month = Integer.parseInt(date[1]);
     		Integer year = Integer.parseInt(date[3]);
@@ -64,7 +65,7 @@ public class WeekProgressActivity extends Activity {
     		
     		if ((now-time)/millsInDay <= min && (now-time)/millsInDay >= 0) {
     			count++;
-    			values[sortDay(dow)] = w.getWeight();
+    			values[sortDay(dow)] = workout.getWeight();
     		}
     	}
     	
@@ -106,8 +107,8 @@ public class WeekProgressActivity extends Activity {
         plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 10.0);
 
 		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		Button pr = (Button) findViewById(R.id.back);
-		pr.setTypeface(font_two);		
+		backButton = (Button) findViewById(R.id.back);
+		backButton.setTypeface(font_two);		
 	}
 	
 	

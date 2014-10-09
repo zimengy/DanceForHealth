@@ -16,7 +16,10 @@ import android.widget.TextView;
 public class WorkoutSummary extends Activity{
 
 	private Workout workout;
-
+	private TextView headerTextView;
+	private Button updateButton;
+	private Button homeButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,17 +27,16 @@ public class WorkoutSummary extends Activity{
 
 		Bundle b = this.getIntent().getExtras();
 		if(b!=null)
-
-		    workout = (Workout) b.get("workout");
+			workout = (Workout) b.get("workout");
 		workout = b.getParcelable("workout");
 
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		TextView txt = (TextView) findViewById(R.id.Header);
-		Button b1 = (Button) findViewById(R.id.button1);
-		Button b2 = (Button) findViewById(R.id.button2);
-		txt.setTypeface(font);
-		b1.setTypeface(font);
-		b2.setTypeface(font);
+		headerTextView = (TextView) findViewById(R.id.Header);
+		updateButton = (Button) findViewById(R.id.updateButton);
+		homeButton = (Button) findViewById(R.id.homeButton);
+		headerTextView.setTypeface(font);
+		updateButton.setTypeface(font);
+		homeButton.setTypeface(font);
 		
 		String feel ;
 		
@@ -72,48 +74,46 @@ public class WorkoutSummary extends Activity{
 		getMenuInflater().inflate(R.menu.workout_summary, menu);
 		return true;
 	}
-
-
-
+	
 	public void onUpdateButtonClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
 		
 		// remove workout so you can recreate it
-		PrevWorkout pw = PrevWorkout.getInstance();
-		List<Workout> all = pw.getPrevious();
+		PrevWorkout preWorkout = PrevWorkout.getInstance();
+		List<Workout> all = preWorkout.getPrevious();
 		
 		Iterator<Workout> iter = all.iterator();
-		Workout temp = new Workout();
+		Workout wk = new Workout();
 		boolean b = false;
 		while (iter.hasNext()) {
-			temp = iter.next();
+			wk = iter.next();
 			
-			if (workout.equals(temp)) {
-				 b = all.remove(temp);
+			if (workout.equals(wk)) {
+				 b = all.remove(wk);
 				 break;
 			}
 		}
 
 		Log.v("removed", "" + b);
 		
-		Intent i = new Intent(this, NewWorkoutActivity.class).putExtra("workout", temp);
+		Intent intent = new Intent(this, NewWorkoutActivity.class).putExtra("workout", wk);
 		
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 
 
 	public void onHomeClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, HomeActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 
 }

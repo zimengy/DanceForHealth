@@ -20,10 +20,17 @@ import android.widget.TextView;
 
 public class HeartRateTwo extends Activity {
 
-	TextView tv;
+	
 	CountDownTimer timer;
-	private Workout w;
-	EditText et;
+	private Workout workout;
+	private EditText edittext;
+	private TextView textview;
+	private TextView twoTextView;
+	private Button timerButton;
+	private TextView threeTextView;
+	private Button heartRateButton;
+	private TextView heartRateTextView;
+	private Button viewSummaryButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,49 +38,49 @@ public class HeartRateTwo extends Activity {
 		setContentView(R.layout.activity_heart_rate_two);
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
 		
-		tv = (TextView)findViewById(R.id.timerText);
-		tv.setTypeface(font);
+		textview = (TextView)findViewById(R.id.timerTextView);
+		textview.setTypeface(font);
         timer = new CountDownTimer(18000, 1000) {
 
             @Override
 			public void onTick(long millisUntilFinished) {
             	if (millisUntilFinished > 17000) {
-            		tv.setText("Ready?");
+            		textview.setText("Ready?");
             	} else if (millisUntilFinished > 16000) {
-            		tv.setText("Set?");
+            		textview.setText("Set?");
             	} else if (millisUntilFinished > 15000) {
-            		tv.setText("Start Counting!");
+            		textview.setText("Start Counting!");
             	} else {
-            		tv.setText("Time left: " + millisUntilFinished / 1000);
+            		textview.setText("Time left: " + millisUntilFinished / 1000);
             	}
             }
 
             @Override
 			public void onFinish() {
-                tv.setText("Stop Counting!");
+            	textview.setText("Stop Counting!");
             }
          };
  		
  		Bundle extras = getIntent().getExtras();
  		if (extras != null) {
- 		    w = (Workout) extras.get("workout");
+ 			workout = (Workout) extras.get("workout");
  		}
  		
-		et = (EditText) findViewById(R.id.hr_input);
+ 		edittext = (EditText) findViewById(R.id.heartRateEditText);
 		
-		TextView txt1 = (TextView) findViewById(R.id.textView1);
-		Button b = (Button) findViewById(R.id.timer);
-		TextView txt2 = (TextView) findViewById(R.id.textView2);
-		Button b1 = (Button) findViewById(R.id.hr_input_button);
-		TextView txt3 = (TextView) findViewById(R.id.hrText);
-		Button b2 = (Button) findViewById(R.id.button1);
-		txt1.setTypeface(font);
-		txt2.setTypeface(font);
-		txt3.setTypeface(font);
-		et.setTypeface(font);
-		b.setTypeface(font);
-		b1.setTypeface(font);
-		b2.setTypeface(font);
+		twoTextView = (TextView) findViewById(R.id.twoTextView);
+		timerButton = (Button) findViewById(R.id.timerButton);
+		threeTextView = (TextView) findViewById(R.id.threeTextView);
+		heartRateButton = (Button) findViewById(R.id.heartRateButton);
+		heartRateTextView = (TextView) findViewById(R.id.heartRateTextView);
+		viewSummaryButton = (Button) findViewById(R.id.viewSummaryButton);
+		twoTextView.setTypeface(font);
+		threeTextView.setTypeface(font);
+		heartRateTextView.setTypeface(font);
+		edittext.setTypeface(font);
+		timerButton.setTypeface(font);
+		heartRateButton.setTypeface(font);
+		viewSummaryButton.setTypeface(font);
 	}
 
 	@Override
@@ -89,26 +96,26 @@ public class HeartRateTwo extends Activity {
 	
 	public void onNextButtonClick(View view) throws IOException {
 
-		PrevWorkout pw = PrevWorkout.getInstance();
-		List<Workout> all = pw.getPrevious();
+		PrevWorkout preWorkout = PrevWorkout.getInstance();
+		List<Workout> all = preWorkout.getPrevious();
 		
 		// set date for Workout object
 		Date date = new Date();
 		SimpleDateFormat ft = 
 				new SimpleDateFormat ("E M dd yyyy");
-		w.setDate(ft.format(date));
+		workout.setDate(ft.format(date));
 		
 		// add workout to database
-		if (!w.getUpdate()) {
-		all.add(w);
+		if (!workout.getUpdate()) {
+		all.add(workout);
 		}
 
 		// add workout to internal memory
-		String data = w.getType() + "," + w.getStrain() + "," + w.getHeartrate() + "," + w.getSteps() 
-				+ "," + w.getWeight() + "," + w.getDate() + "," + w.getTime() + "\n";
+		String data = workout.getType() + "," + workout.getStrain() + "," + workout.getHeartrate() + "," + workout.getSteps() 
+				+ "," + workout.getWeight() + "," + workout.getDate() + "," + workout.getTime() + "\n";
 		String file = "data_workout";
 		
-		Log.v("duration", "= " + w.getTime());
+		Log.v("duration", "= " + workout.getTime());
 
 		
 	      try {
@@ -124,30 +131,30 @@ public class HeartRateTwo extends Activity {
 		
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, WorkoutSummary.class).putExtra("workout", w);
+		Intent intent = new Intent(this, WorkoutSummary.class).putExtra("workout", workout);
 
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 	
 	public void onHRButtonClick(View view) {
-		TextView t = (TextView)findViewById(R.id.hrText);
-		String input = et.getText().toString();
+		TextView heartRateTextView = (TextView)findViewById(R.id.heartRateTextView);
+		String input = edittext.getText().toString();
 		int numIn = Integer.parseInt(input) * 4;
-		t.setText("\nYour heart rate is: " + numIn + "\n");
+		heartRateTextView.setText("\nYour heart rate is: " + numIn + "\n");
 		int heartrate = numIn;
-		w.setHeartrate(numIn);
+		workout.setHeartrate(numIn);
 	}
 	public void onBackButtonClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, HeartRateActivity.class).putExtra("workout", w);
+		Intent intent = new Intent(this, HeartRateActivity.class).putExtra("workout", workout);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 
 }

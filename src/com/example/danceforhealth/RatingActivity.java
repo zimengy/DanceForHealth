@@ -13,7 +13,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class RatingActivity extends Activity{
-	private Workout w;
+	private Workout workout;
+	private Button nextButton;
+	private TextView tv_instruction;
+	private TextView tv_like;
+	private TextView tv_fun;
+	private TextView tv_tired;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +26,20 @@ public class RatingActivity extends Activity{
 		setContentView(R.layout.activity_rating);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-		    w = (Workout) extras.get("workout");
+			workout = (Workout) extras.get("workout");
 		}
 		
-		TextView tv1 = (TextView) findViewById(R.id.textView1);
-		TextView tv2 = (TextView) findViewById(R.id.textView2);
-		TextView tv3 = (TextView) findViewById(R.id.textView3);
-		TextView tv4 = (TextView) findViewById(R.id.textView6);
-		Button b = (Button) findViewById(R.id.button1);
+		tv_instruction = (TextView) findViewById(R.id.instructionTextView);
+		tv_like = (TextView) findViewById(R.id.likeTextView);
+		tv_fun = (TextView) findViewById(R.id.funTextView);
+		tv_tired = (TextView) findViewById(R.id.tiredTextView);
+		nextButton = (Button) findViewById(R.id.nextButton);
 		Typeface font = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		tv1.setTypeface(font);
-		tv2.setTypeface(font);
-		tv3.setTypeface(font);
-		tv4.setTypeface(font);
-		b.setTypeface(font);
+		tv_instruction.setTypeface(font);
+		tv_like.setTypeface(font);
+		tv_fun.setTypeface(font);
+		tv_tired.setTypeface(font);
+		nextButton.setTypeface(font);
 
 	}
 	
@@ -67,17 +72,17 @@ public class RatingActivity extends Activity{
 		// strain is average of survey
 		int strain = (liked + fun + tired)/3;
 		
-			// create an Intent using the current Activity 
-			// and the Class to be created
-			w.setStrain(strain);
+		// create an Intent using the current Activity 
+		// and the Class to be created
+		workout.setStrain(strain);
 			
-			Log.v("duration", "= " + w.getTime());
+		Log.v("duration", "= " + workout.getTime());
 			
-			Intent i = new Intent(this, WeightAndStepsActivity.class).putExtra("workout", w);
+		Intent intent = new Intent(this, WeightAndStepsActivity.class).putExtra("workout", workout);
 	
-			// pass the Intent to the Activity, 
-			// using the specified request code
-			startActivity(i);
+		// pass the Intent to the Activity, 
+		// using the specified request code
+		startActivity(intent);
 		
 	}
 //	public void onBackButtonClick(View view) {

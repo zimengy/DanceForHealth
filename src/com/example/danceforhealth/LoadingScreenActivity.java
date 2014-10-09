@@ -89,10 +89,10 @@ public class LoadingScreenActivity extends Activity{
 		}
 		// set fonts
 		welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-		Typeface komikaFont1 = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
-		Typeface komikaFont2 = Typeface.createFromAsset(getAssets(),
+		Typeface font = Typeface.createFromAsset(getAssets(), "KOMIKAX_.ttf");
+		Typeface font_two = Typeface.createFromAsset(getAssets(),
 				"Komika_display.ttf");
-		welcomeTextView.setTypeface(komikaFont1);
+		welcomeTextView.setTypeface(font);
 		
 		levelTextView = (TextView) findViewById(R.id.workoutLevelTextView);
 		// level up every 5 hours you work out
@@ -103,7 +103,7 @@ public class LoadingScreenActivity extends Activity{
 		levelTextView.setText("You are currently at level " + level + " and have lost "+
 				 + calculateWeightLoss() + " pounds!\nWork out for " +
 				minutesUntilNext + " more minutes to level up!");
-		levelTextView.setTypeface(komikaFont2);
+		levelTextView.setTypeface(font_two);
 		//leveltxt.setTyp
 		timer.start();
 	}

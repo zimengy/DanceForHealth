@@ -9,21 +9,26 @@ import android.view.View;
 import android.widget.Button;
 
 public class GraphActivity extends Activity {
-
+	
+	private Button backButton;
+	private Button weekButton;
+	private Button monthButton;
+	private Button yeatButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_graph);
 		
 		Typeface font_two = Typeface.createFromAsset(getAssets(), "Komika_display.ttf");
-		Button pr = (Button) findViewById(R.id.back);
-		Button w = (Button) findViewById(R.id.week);
-		Button m = (Button) findViewById(R.id.month);
-		Button y = (Button) findViewById(R.id.year);
-		pr.setTypeface(font_two);
-		w.setTypeface(font_two);
-		m.setTypeface(font_two);
-		y.setTypeface(font_two);
+		backButton = (Button) findViewById(R.id.back);
+		weekButton = (Button) findViewById(R.id.week);
+		monthButton = (Button) findViewById(R.id.month);
+		yeatButton = (Button) findViewById(R.id.year);
+		backButton.setTypeface(font_two);
+		weekButton.setTypeface(font_two);
+		monthButton.setTypeface(font_two);
+		yeatButton.setTypeface(font_two);
 	}
 
 	@Override
@@ -41,31 +46,31 @@ public class GraphActivity extends Activity {
 	public void onWeekButtonClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, WeekProgressActivity.class);
+		Intent intent = new Intent(this, WeekProgressActivity.class);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 	
 	public void onMonthButtonClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, MonthProgressActivity.class);
+		Intent intent = new Intent(this, MonthProgressActivity.class);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 	
 	public void onYearButtonClick(View view) {
 		// create an Intent using the current Activity 
 		// and the Class to be created
-		Intent i = new Intent(this, YearProgressActivity.class);
+		Intent intent = new Intent(this, YearProgressActivity.class);
 
 		// pass the Intent to the Activity, 
 		// using the specified request code
-		startActivity(i);
+		startActivity(intent);
 	}
 
 }
